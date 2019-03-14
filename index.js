@@ -1,11 +1,10 @@
-'use strict';
 
-var ParallaxImage = require('./ParallaxImage');
-var ParallaxMixin = require('./ParallaxMixin');
-var ParallaxScrollViewComposition = require('./ParallaxScrollViewComposition');
+import ParallaxImage from './ParallaxImage'
+import ParallaxScrollViewComposition from './ParallaxScrollViewComposition'
 
-module.exports = {
+const Parallax = {
   Image: ParallaxImage,
-  ScrollView: ParallaxScrollViewComposition,
-  Mixin: ParallaxMixin,
-};
+  ScrollView: ParallaxScrollViewComposition
+}
+
+export default Parallax

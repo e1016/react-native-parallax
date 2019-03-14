@@ -13,23 +13,41 @@ npm install --save react-native-parallax
 *Note: `Parallax.Image` elements must be direct descendants of `Parallax.ScrollView`*
 
 ```js
-var Parallax = require('react-native-parallax');
+import React, { Component } from 'react'
+import {
+  View,
+  Text,
+  StyleSheet
+} from 'react-native'
 
-var ParallaxView = React.createClass({
-  render: function() {
+import Parallax from 'react-native-parallax'
+
+class ParallaxView extends Component {
+  render () {
     return (
       <Parallax.ScrollView>
+
         <Parallax.Image
           style={{ height: 200 }}
           overlayStyle={{ backgroundColor: 'rgba(0,0,0,0.3)'}}
-          source={{ uri: 'http://loremflickr.com/640/480' }}
-        >
+          source={{ uri: 'http://loremflickr.com/640/480' }}>
+
           <Text>This is optional overlay content</Text>
+
         </Parallax.Image>
+
       </Parallax.ScrollView>
-    );
-  },
-});
+    )
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+})
 ```
 
 ## `Parallax.ScrollView` Properties
@@ -55,11 +73,6 @@ Any [`Image` property](http://facebook.github.io/react-native/docs/image.html) a
 
 ![Demo](https://cloud.githubusercontent.com/assets/378279/8894786/81b493f8-33c3-11e5-9a5a-8695642c6ee7.gif)
 
-## Example 
-
-Check full example in the `Example` folder. 
-
 ## License
 
 [MIT License](http://opensource.org/licenses/mit-license.html). © Joel Arvidsson
-
