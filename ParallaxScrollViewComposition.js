@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import {
   Animated,
-  ScrollView
+  ScrollView,
+  View
 } from 'react-native'
 
 import ParallaxImage from './ParallaxImage'
@@ -87,7 +88,14 @@ class ParallaxScrollViewComposition extends Component {
         scrollEventThrottle={ 16 }
         onScroll={ handleScroll }
         { ...props }>
-        { children }
+        <View style={{
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            alignContent: 'center'
+          }}>
+          { children }
+        </View>
       </ScrollComponent>
     )
   }

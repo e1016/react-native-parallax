@@ -5,7 +5,7 @@ import {
   Animated,
   StyleSheet,
   Dimensions,
-  TouchableHighlight
+  TouchableOpacity
 } from 'react-native'
 
 var WINDOW_HEIGHT = Dimensions.get('window').height;
@@ -27,10 +27,8 @@ class ParallaxImage extends Component {
 
   // Measure again since onLayout event won't pass the offset
   handleLayout (event) {
-    console.log('this.isLayoutStale', this.isLayoutStale)
     if (this.isLayoutStale) {
-      console.log('Getting size')
-      var comp = this._touchable || this._container
+      var comp = this.thble || this._container
       comp.measure(this.handleMeasure.bind(this))
     }
   }
@@ -42,9 +40,6 @@ class ParallaxImage extends Component {
   }
 
   handleMeasure (ox, oy, width, height, px, py) {
-
-    console.log(ox,oy,width, height, px, py)
-
     this.isLayoutStale = false
     this.setState({
       offset: py,
@@ -63,6 +58,7 @@ class ParallaxImage extends Component {
       imageStyle,
       overlayStyle,
       children,
+      touchableStyles,
       ...props
     } = this.props
 
@@ -71,8 +67,6 @@ class ParallaxImage extends Component {
 
     height = height + parallaxPadding * 2
     var parallaxStyle = { height, width }
-
-    console.log('src:', this.props.source)
 
     if (scrollY) {
       parallaxStyle.transform = [
@@ -90,8 +84,6 @@ class ParallaxImage extends Component {
       ]
     }
 
-    console.log(parallaxStyle)
-
     var content = (
       <View
         ref={ component => this._container = component }
@@ -102,23 +94,20 @@ class ParallaxImage extends Component {
           style={[ imageStyle, parallaxStyle ]}
           pointerEvents="none"
         />
-        <View style={[ styles.overlay, overlayStyle ]}>
-          { children }
-        </View>
       </View>
     )
     // Since we can't allow nested Parallax.Images, we supply this shorthand to wrap a touchable
     // around the element
     if (onPress) {
-      console.log(content)
       return (
-        <TouchableHighlight
-          ref={ component => {
-            this._touchable = component
-          }}
+        <TouchableOpacity
+          activeOpacity={ 0.8 }
+          style={ touchableStyles }
+          ref={ component => { this.thble = component }}
           onPress={ onPress }>
           { content }
-        </TouchableHighlight>
+          { children }
+        </TouchableOpacity>
       )
     }
     return content
@@ -128,15 +117,15 @@ class ParallaxImage extends Component {
 var styles = StyleSheet.create({
   container: {
     overflow: 'hidden',
-    position: 'relative'
+    // position: 'relative'
   },
   overlay: {
     flex: 1,
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0
+    // position: 'absolute',
+    // top: 0,
+    // left: 0,
+    // right: 0,
+    // bottom: 0
   }
 })
 

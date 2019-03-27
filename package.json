@@ -1,7 +1,7 @@
 {
-  "name": "react-native-parallax",
+  "name": "parallax-react-native",
   "version": "0.3.0",
-  "description": "Parallax effects for React Native using Animated API",
+  "description": "Parallax effects for React Native using Animated API (react-native-parallax fork)",
   "main": "index.js",
   "scripts": {
     "test": "flow check"
